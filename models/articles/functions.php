@@ -37,4 +37,31 @@
         $result = $select->fetchAll();
         return $result;
     }
+    function insertArticle($name, $text, $path, $userId){
+        global $conn;
+        $query = "INSERT INTO article(ArticleName, Text, InitialPicture, UserId) VALUES (:name, :text, :path, :id)";
+        $insert = $conn->prepare($query);
+
+        $insert->bindParam(":name", $name);
+        $insert->bindParam(":text", $text);
+        $insert->bindParam(":path", $path);
+        $insert->bindParam(":id", $userId);
+        $result = $insert->execute();
+        return $result;
+    }
+    function getLastId(){
+        global $conn;
+        return $conn->lastInsertId();
+    }
+    function insertPictures($alt, $path, $id){
+        global $conn;
+        $query = "INSERT INTO picture VALUES (NULL, :alt, :path, :id)";
+        $insert = $conn->prepare($query);
+
+        $insert->bindParam(":alt", $alt);
+        $insert->bindParam(":path", $path);
+        $insert->bindParam(":id", $id);
+        $result = $insert->execute();
+        return $result;
+    }
 ?>

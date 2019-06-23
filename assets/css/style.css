@@ -24,3 +24,7 @@
 .img-width{
     width:20%;
 }
+.borders{
+    border-top:1px solid #dc3545;
+    margin:20px 0px;
+}

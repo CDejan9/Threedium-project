@@ -29,9 +29,15 @@
                     <input type="file" class="custom-file-input" id="fImage" required/>
                     <label class="custom-file-label" for="fImage">Choose file...</label>
                 </div>
+                <div class="col-12 padding" id="pictures"></div>
+                <div class="form-group col-12" id="buttons">
+                    <span class="col-4">
+                        <button type="button" class="btn btn-default backgroundColor other-picture">Add a new picture</button>
+                    </span>
+                </div>
                 <div class="form-group">
                 <br>
-                    <button type="submit" class="btn btn-default backgroundColor btn-block" id="btnInsert">Insert</button>
+                    <button type="button" class="btn btn-default backgroundColor btn-block" id="btnInsertArticle">Insert</button>
                     </div>
             </form>
         </div>
@@ -39,7 +45,13 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-12 mx-auto padding-50">
+        <div class="col-12 mx-auto padding-50" id="listOfAllArticles">
+            <?php
+            if(count($articles) == 0){
+                echo "<p>No items.</p>";
+            }
+            else{
+            ?>
             <table class="table">
                 <tr>
                     <th>ID</th>
@@ -68,6 +80,7 @@
                 </tr>
                 <?php endforeach;?>
             </table>
+            <?php } ?>
         </div>
     </div>
 </div>
