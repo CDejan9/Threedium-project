@@ -98,6 +98,26 @@ $(document).ready(function(){
         });
         
     });
+
+    //Brisanje artikala
+    $(document).on('click', '.delete', function(e){
+        e.preventDefault();
+        let id = $(this).data('idarticle');
+        $.ajax({
+            url: "models/articles/delete-article.php",
+            method: "POST",
+            dataType: "json",
+            data:{
+                id : id
+            },
+            success:function (data) {
+                printArticles(data);
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+    });
 });
 //Funkcija koja dohvata sve proizvode i inicijalno iz ispisuje 
 function getArticles(){
@@ -115,6 +135,7 @@ function getArticles(){
 }
 //funkcija koja se poziva u succesu za ispisivanje artikala
 function printArticles(data){
+    let url = window.location.href;
     let articlesHtml="";
     if(data.length == 0){
         articlesHtml += "No items.";
@@ -127,11 +148,20 @@ function printArticles(data){
                 <th></th>
                 <th>Article name</th>
                 <th>Article text</th>
-                <th>Date</th>
-                <th>User</th>
-                <th></th>
-            </tr>
-        `;
+                <th>Date</th>`
+                if(url.indexOf("articles") == -1)
+                {
+                    articlesHtml += `<th></th>
+                    <th></th>
+                    <th></th>`
+                }
+                else{
+                    articlesHtml += ` <th>User</th>
+                    <th></th>`
+                }
+               
+            articlesHtml += `</tr>` 
+        ;
         let id = 1;
         for(let article of data)
         {
@@ -143,11 +173,19 @@ function printArticles(data){
                 <td><img style="width:200px"src="assets/images/${article.InitialPicture}" /></td>
                 <td>${article.ArticleName}</td>
                 <td>${(article.Text).substr(0,50)}</td>
-                <td>${datePrint}</td>
-                <td>${article.Username}</td>
-                <td><a href="index.php?page=single-article&id=${article.ArticleId}">Details</a></td>
-            </tr>
-            `;
+                <td>${datePrint}</td>`
+                if(url.indexOf("articles") == -1)
+                {
+                    articlesHtml += `<td><a href="#" data-idarticle="${article.ArticleId}"><i class='fas fa-edit'></i></a></td>
+                    <td><a href="#" data-idarticle="${article.ArticleId}" class="delete"><i class='fas fa-times'></i></a></td>`
+                }
+                else{
+                    articlesHtml += ` <td>${article.Username}</td>`
+                }
+                
+            articlesHtml +=  `<td><a href="index.php?page=single-article&id=${article.ArticleId}">Details</a></td>`
+            articlesHtml += ` </tr>`
+            ;
         }
         articlesHtml += "</table>";
     }

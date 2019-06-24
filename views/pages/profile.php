@@ -75,7 +75,7 @@
                     <td><?=substr($article->Text, 0, 50)?></td>
                     <td><?=date("d.m.Y.", strtotime($article->CreatedAt))?></td>
                     <td><a href="#" data-idarticle="<?=$article->ArticleId?>"><i class='fas fa-edit'></i></a></td>
-                    <td><a href="#" data-idarticle="<?=$article->ArticleId?>"><i class='fas fa-times'></i></a></td>
+                    <td><a href="#" data-idarticle="<?=$article->ArticleId?>" class="delete"><i class='fas fa-times'></i></a></td>
                     <td><a href="index.php?page=single-article&id=<?=$article->ArticleId?>">Details</a></td>
                 </tr>
                 <?php endforeach;?>

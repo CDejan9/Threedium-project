@@ -64,4 +64,13 @@
         $result = $insert->execute();
         return $result;
     }
+    function deleteArticle($id){
+        global $conn;
+        $query = "DELETE FROM `article` WHERE ArticleId = :id";
+        $delete = $conn->prepare($query);
+
+        $delete->bindParam(":id",$id);
+        $result = $delete->execute();
+        return $result;
+    }
 ?>
