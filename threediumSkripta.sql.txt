@@ -1,0 +1,204 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 27, 2019 at 01:18 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `threedium`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `article`
+--
+
+CREATE TABLE `article` (
+  `ArticleId` int(50) NOT NULL,
+  `ArticleName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Text` varchar(700) COLLATE utf8_unicode_ci NOT NULL,
+  `InitialPicture` varchar(700) COLLATE utf8_unicode_ci NOT NULL,
+  `CreatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Modified` timestamp NULL DEFAULT NULL,
+  `UserId` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `article`
+--
+
+INSERT INTO `article` (`ArticleId`, `ArticleName`, `Text`, `InitialPicture`, `CreatedAt`, `Modified`, `UserId`) VALUES
+(1, 'It Chapter 2 Writer Is Relieved Stephen King Likes The Sequel', 'Gary Dauberman is a very, very busy man at this moment. With Annabelle Comes Home marking his debut as a director and continued role as the series’ writer, he’s already an active character in the world of horror. But with everything from the newly cancelled Swamp Thing to an upcoming remake of Salem’s Lot on his hands as well, the man’s got a lot on his mind.', '1561584373_king.jpg', '2019-06-26 21:26:13', NULL, 3),
+(2, 'John Wick Artillery Trainer Explains Why The Franchise Gets Gunfight Scenes So Right', 'The John Wick franchise has proven incredibly popular, with each installment only doing better than its predecessor at the box office. One of the reasons for this is that the world loves of Keanu Reeves with a fiery passion that knows no bounds, but another reason for this is that the action in the movies is simply incredible.\n\nThere\'s a unique style to John Wick movie action that is absolutely amazing. Keanu Reeves goes through a lot of training to make it all look as good as it does, but while there\'s clearly a lot of work that goes into making the gun fights look fun and exciting, there\'s also a lot of work that goers into making them look real.', '1561584658_johnwick.jpg', '2019-06-26 21:30:58', NULL, 3),
+(3, 'Looks Like Keanu Reeves Is Responsible For How Great Toy Story 4\'s Duke Caboom Is', 'Thanks to a recent string of scene-stealing performances from Keanu Reeves, the actor has become 2019’s icon and obsession. Some will say the Keanuaissance is a happy accident of coinciding releases. They’d be dead wrong, and the proof can be found in the making of Toy Story 4.\n\nFor Woody’s latest (and last?) adventure, he has the help of Canada’s greatest stuntman: Duke Caboom. Keanu Reeves voiced the hilarious scene-stealer, who also has a tragic backstory he’s working through in the film. The animated film’s director Josh Cooley recently attributed the John Wick actor to Duke’s depth instantly.', '1561584872_toystory.jpg', '2019-06-26 21:34:32', NULL, 3),
+(4, 'Spider-Man: Far from Home\'s Runtime Seemingly Confirms An Epic Marvel Theory', 'The Marvel Cinematic Universe has changed the landscape of filmmaking forever. Serialized storytelling has since become commonplace, as major blockbusters interconnect and crossover. But while there might be multiple shared universes releasing new blockbusters, it was Marvel Studios that introduced it to the world through Phase One.\n\nSince then, the MCU has grown exponentially, and it\'s also become a more interconnected place. Avengers: Infinity War and Endgame allowed the various franchises to collide, resulting in fun new character pairings. The franchise has done great things with serialized storytelling, but it turns out that Phase Three might be even more planned out than we thought. Na', '1561584965_spiderman.jpg', '2019-06-26 21:36:05', '2019-06-26 09:36:29', 3),
+(5, 'Unlike Avengers', 'I know multiple people who went into Avengers: Endgame with peeing strategies. They either dehydrated themselves or spoke to someone who had already seen the movie and asked when the best part to leave would be. Fortunately, for most people with at least average holding it skills, no such strategies will be needed for Spider-Man: Far From Home. The film isn’t short by regular movie standards, but by Marvel standards, it’s very reasonable.', '1561586909_Unlike_Avengers.jpg', '2019-06-26 22:08:29', '2019-06-27 10:15:07', 4),
+(6, 'James Wan’s Next Film Won’t Be Aquaman 2', 'The DC live-action universe\'s tenure in theaters has been a fascinating one, as Warner Bros. is constantly changing its plan of action on the massive franchise. Things looked bleak after the poor performance of Justice League, although James Wan\'s Aquaman showed that the DCEU was truly capable of. And the movie did so well that a sequel and spinoff were promptly ordered.', '1561587244_James_Wan.jpg', '2019-06-26 22:14:04', '2019-06-27 10:15:33', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `picture`
+--
+
+CREATE TABLE `picture` (
+  `PictureId` int(50) NOT NULL,
+  `Alt` varchar(700) COLLATE utf8_unicode_ci NOT NULL,
+  `Path` varchar(700) COLLATE utf8_unicode_ci NOT NULL,
+  `ArticleId` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `picture`
+--
+
+INSERT INTO `picture` (`PictureId`, `Alt`, `Path`, `ArticleId`) VALUES
+(1, 'John Wick Artillery Trainer Explains Why The Franchise Gets Gunfight Scenes So Right', '1561584658_johnwick_2.jpg', 2),
+(2, 'John Wick Artillery Trainer Explains Why The Franchise Gets Gunfight Scenes So Right', '1561584658_johnwick_3.jpg', 2),
+(3, 'Looks Like Keanu Reeves Is Responsible For How Great Toy Story 4\'s Duke Caboom Is', '1561584872_toy-story-4.jpg', 3),
+(6, 'James Wan’s Next Film Won’t Be Aquaman 2', '1561587244_James_Wan3.jpg', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `RoleId` int(50) NOT NULL,
+  `RoleName` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`RoleId`, `RoleName`) VALUES
+(1, 'Admin'),
+(2, 'User');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `UserId` int(50) NOT NULL,
+  `Name` varchar(90) COLLATE utf8_unicode_ci NOT NULL,
+  `Surname` varchar(90) COLLATE utf8_unicode_ci NOT NULL,
+  `Username` varchar(90) COLLATE utf8_unicode_ci NOT NULL,
+  `Password` varchar(90) COLLATE utf8_unicode_ci NOT NULL,
+  `CreatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `RoleId` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`UserId`, `Name`, `Surname`, `Username`, `Password`, `CreatedAt`, `RoleId`) VALUES
+(1, 'TestName', 'TestSurname', 'test', 'cc03e747a6afbbcbf8be7668acfebee5', '2019-06-22 13:28:26', 1),
+(3, 'John', 'Smith', 'JohnSmith', '6e0b7076126a29d5dfcbd54835387b7b', '2019-06-26 21:02:51', 1),
+(4, 'Jack', 'Sparrow', 'Jack47', '1d6c1e168e362bc0092f247399003a88', '2019-06-26 21:05:24', 2);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`ArticleId`),
+  ADD KEY `UserId` (`UserId`);
+
+--
+-- Indexes for table `picture`
+--
+ALTER TABLE `picture`
+  ADD PRIMARY KEY (`PictureId`),
+  ADD KEY `ArticleId` (`ArticleId`);
+
+--
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`RoleId`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`UserId`),
+  ADD KEY `RoleId` (`RoleId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `article`
+--
+ALTER TABLE `article`
+  MODIFY `ArticleId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `picture`
+--
+ALTER TABLE `picture`
+  MODIFY `PictureId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `RoleId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `UserId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `article`
+--
+ALTER TABLE `article`
+  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`);
+
+--
+-- Constraints for table `picture`
+--
+ALTER TABLE `picture`
+  ADD CONSTRAINT `AdticleIdCascade` FOREIGN KEY (`ArticleId`) REFERENCES `article` (`ArticleId`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`RoleId`) REFERENCES `role` (`RoleId`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
