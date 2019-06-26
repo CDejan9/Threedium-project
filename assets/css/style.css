@@ -28,3 +28,22 @@
     border-top:1px solid #dc3545;
     margin:20px 0px;
 }
+.additionalPicture{
+    cursor: pointer;
+}
+.custom-file-label{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.articles-pagination, .articles-pagination-all{
+    padding:0px 10px;
+}
+.pagination{
+    
+    margin-top:10px;
+}
+.pagination-color{
+    background: rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}

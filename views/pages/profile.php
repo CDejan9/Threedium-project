@@ -1,10 +1,11 @@
 <?php if(isset($_SESSION['user'])){
     include "views/fixed/nav.php";
-    $userId = $_SESSION['user']->UserId;
+    $userId = $_SESSION['userId'];
     include "models/users/functions.php";
     include "models/articles/functions.php";
     $user = userInfo($userId);
-    $articles = allArticlesByUser($userId);
+    $limit =  isset($_GET['limit'])? $_GET['limit'] : 0;
+    $articles = allArticlesByUser($userId, $limit);
     
 ?>
 <div class="container">
@@ -14,7 +15,7 @@
             <p>Username: <?=$user->Username?></p>
             <p>Profile created at: <?=date("d.m.Y.", strtotime($user->CreatedAt))?></p>
         </div>
-        <div class="col-7">
+        <div class="col-7" id="insertForm">
              <h3 class="padding-30">Insert article</h3>
             <form action="">
                 <div class="form-group">
@@ -72,9 +73,9 @@
                     <td><?=$id++?></td>
                     <td><img style="width:200px"src="assets/images/<?=$article->InitialPicture?>" /></td>
                     <td><?=$article->ArticleName?></td>
-                    <td><?=substr($article->Text, 0, 50)?></td>
-                    <td><?=date("d.m.Y.", strtotime($article->CreatedAt))?></td>
-                    <td><a href="#" data-idarticle="<?=$article->ArticleId?>"><i class='fas fa-edit'></i></a></td>
+                    <td><?=substr($article->Text, 0, 50)?>...</td>
+                    <td><?=date("d.m.Y.", strtotime($article->created))?></td>
+                    <td><a href="index.php?page=show-update&id=<?=$article->ArticleId?>"><i class='fas fa-edit'></i></a></td>
                     <td><a href="#" data-idarticle="<?=$article->ArticleId?>" class="delete"><i class='fas fa-times'></i></a></td>
                     <td><a href="index.php?page=single-article&id=<?=$article->ArticleId?>">Details</a></td>
                 </tr>
@@ -83,6 +84,24 @@
             <?php } ?>
         </div>
     </div>
+    <?php
+            if(count($articles) != 0):
+        ?>
+            <div class="row justify-content-center pagination-color">
+                <nav>
+                <ul class="pagination" id="pagination">
+                      <?php
+                        $num_of_articles = get_pagination_count($userId);
+                        for($i = 0; $i < $num_of_articles; $i++):
+                      ?>
+                        <li class="page-item">
+                          <a href="#" class="articles-pagination" data-limit="<?= $i ?>"><?= $i+1 ?>  </a>
+                        </li>
+                      <?php endfor; ?>
+                  </ul> 
+                </nav> 
+            </div>
+        <?php endif; ?>
 </div>
 
 

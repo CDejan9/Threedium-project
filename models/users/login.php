@@ -28,8 +28,11 @@
 
             try{
                 $isLogged = login($username, $password);
-                $_SESSION['user'] = $isLogged;
-                header("Location: ../../index.php?page=articles");
+                if($isLogged){
+                    $_SESSION['user'] = $isLogged;
+                    $_SESSION['userId'] = $isLogged->UserId;
+                    header("Location: ../../index.php?page=articles");
+                }
             }
             catch (PDOException $exception){
                 $errors[] = "Error occurred when logging in.";

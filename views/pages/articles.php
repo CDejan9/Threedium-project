@@ -21,10 +21,17 @@
             </form>
         </div>
     </div>
-</div><div class="container">
+</div>
+<div class="container">
     <div class="row padding-50">
         <div class="col-12 mx-auto" id="listOfAllArticles">
         </div>
+    </div>
+    <div class="row justify-content-center" id="pagination-line">
+        <nav>
+            <ul class="pagination" id="pagination">
+            </ul> 
+        </nav> 
     </div>
 </div>
 <?php 

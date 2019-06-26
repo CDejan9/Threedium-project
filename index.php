@@ -17,6 +17,9 @@
             case 'single-article':
                 include "views/pages/single-article.php";
                 break;    
+            case 'show-update':
+                include "views/pages/show-update-data-article.php";
+                break;
             default:
                 include "views/pages/login.php";
         }
